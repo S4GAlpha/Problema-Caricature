@@ -22,10 +22,8 @@ public void run() {
         try {
             chairsSemaphore.acquire();
             System.out.println("L'artista inizia a disegnare");
-
             int tempoDiLavoro = new Random().nextInt(MAX_EXECUTION_TIME); 
             Thread.sleep(tempoDiLavoro * 1000);
-
             System.out.println("Disegno Fatto");
             completionMutex.release();
             chairsSemaphore.release();
@@ -35,6 +33,7 @@ public void run() {
         }
     }
 }
+
 È importante notare che l'artista può continuare a disegnare anche se non ci sono clienti.
 
 Cliente
@@ -44,11 +43,9 @@ java
 Copy code
 public void run() {
     System.out.println("Il cliente: " + this.IDCliente + " è appena arrivato");
-
     try {
         if (chairsSemaphore.tryAcquire()) {
             System.out.println("Il cliente " + this.IDCliente + " si siede");
-
             completionMutex.acquire();
             System.out.println("Il cliente " + this.IDCliente + " ha completato il ritratto");
             chairsSemaphore.release();
@@ -60,6 +57,7 @@ public void run() {
         Thread.currentThread().interrupt();
     }
 }
+
 Main
 Il metodo main è il punto di ingresso del programma. Qui vengono create le istanze dell'artista e dei clienti. È possibile specificare il numero massimo di azioni (ad esempio, il numero massimo di clienti o di ritratti da realizzare). Le sedie disponibili per i clienti vengono gestite utilizzando un semaforo a conteggio (chairsSemaphore), mentre il mutex completionMutex viene utilizzato per sincronizzare il completamento del ritratto tra l'artista e i clienti.
 
@@ -71,14 +69,11 @@ public static void main(String[] args) {
     Semaphore chairsSemaphore = new Semaphore(NUM_CHAIRS, true);
     Semaphore completionMutex = new Semaphore(0, true);
     Random random = new Random();
-
     Artista artist = new Artista(chairsSemaphore, completionMutex, NUM_OF_ACTIONS);
     artist.start();
-
     for (int i = 1; i <= NUM_OF_ACTIONS; i++) {
         Thread clientThread = new Thread(new Cliente(i, chairsSemaphore, completionMutex));
         clientThread.start();
-
         try {
             Thread.sleep(random.nextInt(2000)); // Intervallo di tempo casuale tra l'arrivo di un cliente e l'altro
         } catch (InterruptedException e) {
@@ -86,6 +81,7 @@ public static void main(String[] args) {
         }
     }
 }
+
 In questo esempio, il main crea un artista e diversi clienti che si alternano per ottenere una sedia e attendere il completamento del proprio ritratto.
 
 Si noti che questa è solo una spiegazione generale dell'algoritmo, basata sul codice fornito. Potrebbero esserci ulteriori dettagli o requisiti specifici che non sono stati menzionati.
