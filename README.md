@@ -15,8 +15,7 @@ La classe Cliente, che rappresenta il thread del cliente.
 Artista
 L'artista inizia disegnando i ritratti dei clienti, senza un tempo preciso per completare ciascun disegno. Il tempo di esecuzione viene generato casualmente. Dopo aver preso una sedia (risorsa condivisa) per iniziare il disegno, l'artista attende il tempo necessario per completare il ritratto. Successivamente, rilascia la sedia per il prossimo cliente e segnala al cliente che il ritratto è pronto utilizzando il mutex completionMutex.
 
-'''java'''
-Copy code
+```java
 public void run() {
 
     for (int i = 1; i <= NUM_OF_ACTIONS; i++) {
@@ -37,14 +36,14 @@ public void run() {
         }
     }
 }
+```
 
 È importante notare che l'artista può continuare a disegnare anche se non ci sono clienti.
 
 Cliente
 Il thread del cliente gestisce l'arrivo dei clienti. Un cliente appena arrivato cerca di trovare una sedia disponibile per sedersi. Se una sedia è disponibile, il cliente si siede e attende che il suo ritratto venga completato utilizzando il mutex completionMutex. Una volta completato il ritratto, il cliente lascia la sedia per altri clienti.
 
-java
-Copy code
+```java
 public void run() {
 
     System.out.println("Il cliente: " + this.IDCliente + " è appena arrivato");
@@ -62,12 +61,12 @@ public void run() {
         Thread.currentThread().interrupt();
     }
 }
+```
 
 Main
 Il metodo main è il punto di ingresso del programma. Qui vengono create le istanze dell'artista e dei clienti. È possibile specificare il numero massimo di azioni (ad esempio, il numero massimo di clienti o di ritratti da realizzare). Le sedie disponibili per i clienti vengono gestite utilizzando un semaforo a conteggio (chairsSemaphore), mentre il mutex completionMutex viene utilizzato per sincronizzare il completamento del ritratto tra l'artista e i clienti.
 
-java
-Copy code
+```java
 public static void main(String[] args) {
 
     final int NUM_CHAIRS = 4;
@@ -87,6 +86,7 @@ public static void main(String[] args) {
         }
     }
 }
+```
 
 In questo esempio, il main crea un artista e diversi clienti che si alternano per ottenere una sedia e attendere il completamento del proprio ritratto.
 
