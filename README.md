@@ -2,16 +2,16 @@ Problema delle caricature
 Analisi:
 Il Problema dell'Artista che deve disegnare un ritratto per ogni Cliente richiede la gestione di diverse entità e risorse. In particolare, abbiamo:
 
-Un Thread Artista che si occupa di creare i disegni per i clienti.
-Un Thread Cliente che gestisce l'arrivo dei clienti, consentendo loro di sedersi se ci sono posti disponibili o di aspettare se non ci sono sedie disponibili.
-Un Semaforo a conteggio che funge da contatore per le sedie disponibili, poiché solo un numero limitato di clienti può essere seduto contemporaneamente.
-Un Mutex che viene utilizzato per segnalare al cliente quando il suo ritratto è pronto.
+. Un Thread Artista che si occupa di creare i disegni per i clienti.
+. Un Thread Cliente che gestisce l'arrivo dei clienti, consentendo loro di sedersi se ci sono posti disponibili o di aspettare se non ci sono sedie disponibili.
+. Un Semaforo a conteggio che funge da contatore per le sedie disponibili, poiché solo un numero limitato di clienti può essere seduto contemporaneamente.
+. Un Mutex che viene utilizzato per segnalare al cliente quando il suo ritratto è pronto.
 Algoritmo
 Il programma è strutturato utilizzando tre classi principali:
 
-La classe principale (Main) che funge da punto di ingresso del programma.
-La classe Artista, che rappresenta il thread dell'artista.
-La classe Cliente, che rappresenta il thread del cliente.
+. La classe principale (Main) che funge da punto di ingresso del programma.
+. La classe Artista, che rappresenta il thread dell'artista.
+. La classe Cliente, che rappresenta il thread del cliente.
 Artista
 L'artista inizia disegnando i ritratti dei clienti, senza un tempo preciso per completare ciascun disegno. Il tempo di esecuzione viene generato casualmente. Dopo aver preso una sedia (risorsa condivisa) per iniziare il disegno, l'artista attende il tempo necessario per completare il ritratto. Successivamente, rilascia la sedia per il prossimo cliente e segnala al cliente che il ritratto è pronto utilizzando il mutex completionMutex.
 
