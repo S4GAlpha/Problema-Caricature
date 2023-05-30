@@ -18,11 +18,15 @@ L'artista inizia disegnando i ritratti dei clienti, senza un tempo preciso per c
 java
 Copy code
 public void run() {
+
     for (int i = 1; i <= NUM_OF_ACTIONS; i++) {
+    
         try {
+        
             chairsSemaphore.acquire();
             System.out.println("L'artista inizia a disegnare");
             int tempoDiLavoro = new Random().nextInt(MAX_EXECUTION_TIME); 
+            
             Thread.sleep(tempoDiLavoro * 1000);
             System.out.println("Disegno Fatto");
             completionMutex.release();
@@ -42,6 +46,7 @@ Il thread del cliente gestisce l'arrivo dei clienti. Un cliente appena arrivato 
 java
 Copy code
 public void run() {
+
     System.out.println("Il cliente: " + this.IDCliente + " è appena arrivato");
     try {
         if (chairsSemaphore.tryAcquire()) {
@@ -64,6 +69,7 @@ Il metodo main è il punto di ingresso del programma. Qui vengono create le ista
 java
 Copy code
 public static void main(String[] args) {
+
     final int NUM_CHAIRS = 4;
     final int NUM_OF_ACTIONS = 10;
     Semaphore chairsSemaphore = new Semaphore(NUM_CHAIRS, true);
