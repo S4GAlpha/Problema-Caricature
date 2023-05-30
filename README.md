@@ -15,7 +15,7 @@ La classe Cliente, che rappresenta il thread del cliente.
 Artista
 L'artista inizia disegnando i ritratti dei clienti, senza un tempo preciso per completare ciascun disegno. Il tempo di esecuzione viene generato casualmente. Dopo aver preso una sedia (risorsa condivisa) per iniziare il disegno, l'artista attende il tempo necessario per completare il ritratto. Successivamente, rilascia la sedia per il prossimo cliente e segnala al cliente che il ritratto è pronto utilizzando il mutex completionMutex.
 
-java
+'''java'''
 Copy code
 public void run() {
 
