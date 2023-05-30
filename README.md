@@ -1,4 +1,4 @@
-# Problema delle caricature
+# Problema Caricature
 ## Analisi:
 Il Problema dell'Artista che deve disegnare un ritratto per ogni Cliente richiede la gestione di diverse entità e risorse. In particolare, abbiamo:
 
